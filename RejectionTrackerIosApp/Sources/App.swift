@@ -97,14 +97,14 @@ struct RejectionTrackerIosApp: App {
                 let container = try result.get()
 
                 let categories: [Category] = [
-                    try! Category(icon: .emoji(value: "🍎"), name: "College"),
-                    try! Category(icon: .emoji(value: "💔"), name: "Romantic"),
-                    try! Category(icon: .emoji(value: "💼"), name: "Job"),
-                    try! Category(
+                    Category(icon: .emoji(value: "🍎"), name: "College"),
+                    Category(icon: .emoji(value: "💔"), name: "Romantic"),
+                    Category(icon: .emoji(value: "💼"), name: "Job"),
+                    Category(
                         icon: .image(url: "https://www.google.com/s2/favicons?sz=64&domain_url=https%3A%2F%2Fycombinator.com"),
                         name: "YCombinator"
                     ),
-                    try! Category(icon: .emoji(value: "💰"), name: "Investor"),
+                    Category(icon: .emoji(value: "💰"), name: "Investor"),
                 ]
 
                 for category in categories {

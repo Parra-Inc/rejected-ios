@@ -10,6 +10,7 @@ import StoreKit
 
 class StoreManager: ObservableObject {
     @Published var products: [Product] = []
+    @Published var error: Error?
     @Published var purchasedProductIDs = Set<String>()
 
     init() {
@@ -21,11 +22,15 @@ class StoreManager: ObservableObject {
     @MainActor
     func requestProducts() async {
         print("Fetching products")
+
+        self.error = nil
+
         do {
             let storeProducts = try await Product.products(for: ["v1.tip.1", "v1.tip.3", "v1.tip.10"])
             products = storeProducts.sorted(by: { $0.price < $1.price })
             print("Fetching products")
         } catch {
+            self.error = error
             print("Failed to load products: \(error)")
         }
     }
@@ -85,6 +90,12 @@ struct TipJarView: View {
                 Text("Buy some karma!")
                     .font(.caption)
                     .foregroundColor(.gray.opacity(  0.5))
+                if let error = storeManager.error {
+                    Text("Something went wrong: \(error.localizedDescription)")
+                        .font(.caption)
+                        .foregroundColor(.red.opacity(70))
+                        .padding(.vertical, 10)
+                }
                 ForEach(storeManager.products) { product in
                     TipButton(emoji: emojiForProduct(product), product: product) {
                         Task {
