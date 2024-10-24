@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aps-environment</key>
+	<string>production</string>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>webcredentials:rejected.parra.io</string>
+		<string>webcredentials:tenant-6c41f4f4-f87f-4d87-b491-a8ec2f5689f0.parra.io</string>
+	</array>
+</dict>
+</plist>
