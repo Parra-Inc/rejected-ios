@@ -16,9 +16,9 @@ struct SettingsTab: View {
     var body: some View {
         NavigationStack {
             List {
-//                Section {
-//                    ProfileCell()
-//                }
+                Section {
+                    TipJarCell()
+                }
 
                 // The appearance picker should only be shown in your app
                 // supports light/dark mode. To enable this, define a dark color
