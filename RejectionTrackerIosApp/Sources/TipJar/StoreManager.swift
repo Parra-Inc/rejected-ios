@@ -40,7 +40,7 @@ class StoreManager {
         do {
             let storeProducts = try await Product.products(for: ["v1.tip.1", "v1.tip.3", "v1.tip.10"])
             products = storeProducts.sorted(by: { $0.price < $1.price })
-            print("Finished fetching products")
+            print("Finished fetching \(storeProducts.count) product(s)")
         } catch {
             self.error = error
             print("Failed to load products: \(error)")
