@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00AF17892CCB2F4E0085BE9D /* TipJarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AF17882CCB2F4E0085BE9D /* TipJarCell.swift */; };
 		0817000276204F7E940105DA /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09C23F1D3295A58EBA80383 /* ProfileCell.swift */; };
 		32AA4522A840809550650DB6 /* Parra in Frameworks */ = {isa = PBXBuildFile; productRef = 27C4AC8F0EC4CF75C24658AF /* Parra */; };
 		3F8E96C2213AC9C019CFE14E /* SettingsFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4319D6E6DC389EBA8CCC6E0 /* SettingsFooter.swift */; };
@@ -19,7 +20,6 @@
 		81B54B40A5D30FB7D16A7AF2 /* ChangePasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49F84C3BF5B13B408C2AD08 /* ChangePasswordCell.swift */; };
 		821428558A46CCB7CA6C97E9 /* LogoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B095E45451B1C3B54F430D /* LogoutCell.swift */; };
 		822FAE652CC7DA41004D9FC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 822FAE642CC7DA41004D9FC5 /* StoreKit.framework */; };
-		822FAE6C2CC7E0C8004D9FC5 /* TipJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBE7752CC495130098A625 /* TipJarView.swift */; };
 		823BA3922CC5D1FC00FC4246 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BA3912CC5D1FC00FC4246 /* PreviewContainer.swift */; };
 		8262A3842CC699E800C06860 /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 8262A3832CC699E800C06860 /* SwipeActions */; };
 		8262A38D2CC6C0FE00C06860 /* EmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 8262A38C2CC6C0FE00C06860 /* EmojiPicker */; };
@@ -54,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00AF17882CCB2F4E0085BE9D /* TipJarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarCell.swift; sourceTree = "<group>"; };
 		06C4D055E8A9FDA3F23B9D71 /* ThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
 		0C9D7B6DFA4BFF023C720B25 /* RoadmapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadmapCell.swift; sourceTree = "<group>"; };
 		124932296BF369C94304139D /* RejectionTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectionTab.swift; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		82BBE76F2CC469870098A625 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		82BBE7712CC4699C0098A625 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		82BBE7732CC48CF90098A625 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
-		82BBE7752CC495130098A625 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
 		82BBE7772CC4978C0098A625 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		90B095E45451B1C3B54F430D /* LogoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCell.swift; sourceTree = "<group>"; };
 		9381353BD4777199E4B1A6EF /* ReviewAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAppCell.swift; sourceTree = "<group>"; };
@@ -101,6 +101,10 @@
 		F5CA272C130632FCFA8D3531 /* AccountHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeader.swift; sourceTree = "<group>"; };
 		FFB402E59E7D6AAB2D5B6BDC /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		00AF178A2CCBCD490085BE9D /* TipJar */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TipJar; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		4BEFC1A80BFBB5312FC410BD /* Frameworks */ = {
@@ -193,7 +197,7 @@
 				82BBE7622CC419280098A625 /* CreateRejectionView.swift */,
 				F49C24ACA60C4F65B9E86936 /* Settings Tab */,
 				82BBE7732CC48CF90098A625 /* ShareView.swift */,
-				82BBE7752CC495130098A625 /* TipJarView.swift */,
+				00AF178A2CCBCD490085BE9D /* TipJar */,
 				82BBE7772CC4978C0098A625 /* Config.swift */,
 				823BA3912CC5D1FC00FC4246 /* PreviewContainer.swift */,
 			);
@@ -241,6 +245,7 @@
 				0C9D7B6DFA4BFF023C720B25 /* RoadmapCell.swift */,
 				D76C7B1BAB2C02E411CCE061 /* ShareCell.swift */,
 				06C4D055E8A9FDA3F23B9D71 /* ThemeCell.swift */,
+				00AF17882CCB2F4E0085BE9D /* TipJarCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -279,6 +284,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				00AF178A2CCBCD490085BE9D /* TipJar */,
 			);
 			name = Rejected;
 			packageProductDependencies = (
@@ -340,7 +348,6 @@
 			files = (
 				82BBE75D2CC412C10098A625 /* CreateCategoryView.swift in Sources */,
 				B0255EE51DD919D2B6F5ACE4 /* AccountHeader.swift in Sources */,
-				822FAE6C2CC7E0C8004D9FC5 /* TipJarView.swift in Sources */,
 				82BBE7582CC40F0D0098A625 /* Button.swift in Sources */,
 				82BBE7612CC4176B0098A625 /* IconView.swift in Sources */,
 				B72D43D0F35102291EB3664E /* AccountView.swift in Sources */,
@@ -374,6 +381,7 @@
 				B1C9DB075B0BCF405BB7C040 /* SettingsTab.swift in Sources */,
 				8262A3902CC6C4D000C06860 /* GetHeightModifier.swift in Sources */,
 				82BBE7562CC40C870098A625 /* DataManager.swift in Sources */,
+				00AF17892CCB2F4E0085BE9D /* TipJarCell.swift in Sources */,
 				54D2BF584E74E96A98CF0FFD /* ShareCell.swift in Sources */,
 				F7EFF34F0C298B7C86FDFE33 /* ThemeCell.swift in Sources */,
 			);
@@ -512,7 +520,7 @@
 				CODE_SIGN_ENTITLEMENTS = RejectionTrackerIosApp/Debug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 22;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 6D44Q764PG;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -544,7 +552,7 @@
 				CODE_SIGN_ENTITLEMENTS = RejectionTrackerIosApp/Release.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 22;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6D44Q764PG;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
