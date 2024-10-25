@@ -38,7 +38,7 @@ extension ModelContext {
     // MARK: - Category Functions
     @MainActor
     func createCategory(icon: Icon?, name: String) -> Category {
-        let newCategory = try! Category(icon: icon, name: name)
+        let newCategory = Category(icon: icon, name: name)
         self.insert(newCategory)
         saveContext()
         return newCategory
