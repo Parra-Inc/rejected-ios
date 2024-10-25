@@ -15,7 +15,7 @@ struct TipJarView: View {
     private let emojiOptions = ["🙏", "❤️", "✨", "💖"]
 
     var body: some View {
-        VStack(spacing: 30) {
+        VStack(spacing: 8) {
             Spacer()
 
             VStack(spacing: 24) {
