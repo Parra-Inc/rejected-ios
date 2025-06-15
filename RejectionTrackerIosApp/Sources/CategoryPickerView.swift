@@ -44,9 +44,11 @@ struct CategoryPickerView: View {
 
     @Binding var selectedCategory: Category?
 
-    let onComplete: ((Category) -> Void)?
+    let onComplete: (Category) -> Void
+    let onClose: () -> Void
 
     @Query(sort: \Category.createdAt) var categories: [Category]
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -136,14 +138,25 @@ struct CategoryPickerView: View {
                 }
             }
             .navigationTitle("Category")
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button {
+                        onClose()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
         }
         .presentationDetents([.medium, .large])
         .sheet(isPresented: $showingCreateCategoryView) {
-            CreateCategoryView { category in
+            CreateCategoryView(onComplete: { category in
                 selectedCategory = category
                 dismiss()
-                onComplete?(category)
-            }
+                onComplete(category)
+            }, onClose: {
+                showingCreateCategoryView = false
+            })
             .fixedSize(horizontal: false, vertical: true)
             .modifier(GetHeightModifier(height: $createCategoryViewHeight))
             .presentationDetents([.height(createCategoryViewHeight)])
@@ -159,6 +172,3 @@ struct CategoryPickerView: View {
         }
     }
 }
-//#Preview {
-//    CategoryPickerView()
-//}

@@ -119,35 +119,24 @@ struct RejectionsTab: View {
                             .frame(height: scrollInsetBottom)
                     }
                 }
-
-
-                VStack {
-                    Spacer()
-
-                    LargeButton(title: "Add Rejection") {
+            }
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button {
                         showingAddRejection = true
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 20)
-                    .background {
-                        GeometryReader { geometry in
-                            LinearGradient(
-                                gradient: Gradient(colors: [.white.opacity(0), .white, .white]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                            .task {
-                                scrollInsetBottom = geometry.size.height
-                            }
-                        }
+                    } label: {
+                        Image(systemName: "plus")
                     }
                 }
             }
             .navigationTitle("Rejections")
             .sheet(isPresented: $showingAddRejection) {
-                CreateRejectionView(isPresented: $showingAddRejection) { rejection in
+                CreateRejectionView { rejection in
                     showingAddRejection = false
                     newRejection = rejection
+                }
+                onClose: {
+                    showingAddRejection = false
                 }
             }
             .sheet(item: $newRejection) { rejection in

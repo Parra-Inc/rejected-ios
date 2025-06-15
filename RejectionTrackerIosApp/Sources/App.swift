@@ -29,8 +29,8 @@ struct RejectionTrackerIosApp: App {
         // Visit Parra's configuration docs to learn what options are available.
         // https://docs.parra.io/sdks/ios/configuration
         ParraApp(
-            tenantId: "<PARRA_TENANT_ID>",
-            applicationId: "<PARRA_APPLICATION_ID>",
+            tenantId: "6c41f4f4-f87f-4d87-b491-a8ec2f5689f0",
+            applicationId: "1c816e7c-0897-446d-9638-91a0c3416743",
             appDelegate: appDelegate,
             configuration: ParraConfiguration(
             theme: ParraTheme(
@@ -76,7 +76,7 @@ struct RejectionTrackerIosApp: App {
                     success: ParraColorSwatch(primary: .green, name: "Success")
                 )
             )
-            )
+        )
 
         ) {
             WindowGroup {

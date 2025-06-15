@@ -9,20 +9,43 @@
 import Parra
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        TabView {
-            RejectionsTab()
-                .tabItem {
-                    Label("Rejections", systemImage: "xmark.circle")
-                }
-                .tag(1)
+enum Tabs {
+    case home
+    case settings
+    case search
+}
 
-            SettingsTab()
-                .tabItem {
-                    Label("Settings", systemImage: "gearshape")
+struct ContentView: View {
+    @State var selectedTab: Tabs = .home
+    @State var searchString = ""
+
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            Tab("Rejections", systemImage: "xmark.circle", value: .home) {
+                RejectionsTab()
+            }
+
+            Tab("Settings", systemImage: "gearshape", value: .settings) {
+                SettingsTab()
+            }
+
+            Tab(value: .search, role: .search) {
+                NavigationStack {
+                    List {
+                        Text("Search")
+                    }
+                    .navigationTitle("Search")
+                    .searchable(text: $searchString)
                 }
+            }
         }
+        .tabBarMinimizeBehavior(.onScrollDown)
+//        .tabViewBottomAccessory {
+//            LargeButton(title: "Add Rejection") {
+//
+//            }
+//        }
+//        .navigationTransition(.zoom)
     }
 }
 

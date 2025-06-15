@@ -8,76 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct CategorySelectControl: View {
-    @Binding var selectedCategory: Category?
-    @State private var showingCategoryPicker = false
-    @State private var showingCreateCategoryView = false
-    @Environment(\.parraTheme) var parraTheme
-    @Query var categories: [Category]
-    let onComplete: ((Category) -> Void)?
-    @State private var createCategoryViewHeight: CGFloat = 300
-
-    var body: some View {
-        HStack {
-            if let category = selectedCategory {
-                Button(action: {
-                    showingCategoryPicker = true
-                }) {
-                    HStack {
-                        IconView(icon: category.decodedIcon())
-
-                        Text(category.name)
-                            .foregroundColor(.primary)
-                        Spacer()
-
-                        if category.id == selectedCategory?.id {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
-                .padding(6)
-            } else {
-                Button(action: {
-                    if categories.isEmpty {
-                        showingCreateCategoryView = true
-                    } else {
-                        showingCategoryPicker = true
-                    }
-                }) {
-                    HStack {
-                        Text("Select category")
-                            .foregroundColor(.gray.opacity(0.5))
-                        Spacer()
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
-            }
-
-            Spacer()
-        }
-        .background(parraTheme.palette.primaryBackground.toParraColor())
-        .cornerRadius(10)
-        .sheet(isPresented: $showingCategoryPicker) {
-            CategoryPickerView(selectedCategory: $selectedCategory, onComplete: onComplete)
-        }
-        .sheet(isPresented: $showingCreateCategoryView) {
-            CreateCategoryView { category in
-                selectedCategory = category
-                onComplete?(category)
-            }
-            .fixedSize(horizontal: false, vertical: true)
-            .modifier(GetHeightModifier(height: $createCategoryViewHeight))
-            .presentationDetents([.height(createCategoryViewHeight)])
-            .presentationDragIndicator(.visible)
-        }
-    }
-}
-
-
 struct CreateRejectionView: View {
-    @Binding var isPresented: Bool
     @State private var category: Category?
     @State private var title = ""
     @State private var note = ""
@@ -90,6 +21,7 @@ struct CreateRejectionView: View {
     @State private var scrollInsetBottom: CGFloat = 44 // Estimate
 
     let onComplete: (_ rejection: Rejection) -> Void
+    let onClose: () -> Void
 
     var body: some View {
         NavigationView {
@@ -99,9 +31,9 @@ struct CreateRejectionView: View {
                         FormControl(
                             title: "Category",
                             error: showCategoryError ? "Please select a category" : nil) {
-                                CategorySelectControl(selectedCategory: $category) { category in
+                                CategorySelectControl(selectedCategory: $category, onComplete: { category in
                                     clearCategoryError()
-                                }
+                                })
                             }
 
                         FormControl(
@@ -154,6 +86,15 @@ struct CreateRejectionView: View {
                 }
             }
             .navigationTitle("Add Rejection")
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button {
+                        onClose()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
         }
     }
 
@@ -184,5 +125,7 @@ struct CreateRejectionView: View {
 }
 #Preview {
 
-    CreateRejectionView(isPresented: .constant(true)) {rejection in }
+    CreateRejectionView {rejection in } onClose: {
+
+    }
 }

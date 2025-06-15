@@ -24,6 +24,7 @@ struct CreateCategoryView: View {
     @Environment(\.modelContext) var modelContext
 
     let onComplete: (_ category: Category) -> Void
+    let onClose: () -> Void
 
     var body: some View {
         NavigationView {
@@ -79,6 +80,15 @@ struct CreateCategoryView: View {
                 }
             }
             .navigationTitle("Add Category")
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button {
+                        onClose()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
             .sheet(isPresented: $showingEmojiPicker) {
                 NavigationView {
                     EmojiPickerView(
@@ -152,6 +162,9 @@ struct CreateCategoryView: View {
 
 #Preview {
     CreateCategoryView() { category in
+
+    }
+    onClose: {
 
     }
 }
