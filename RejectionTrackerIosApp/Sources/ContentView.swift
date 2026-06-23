@@ -39,7 +39,7 @@ struct ContentView: View {
                 }
             }
         }
-        .tabBarMinimizeBehavior(.onScrollDown)
+        .modifier(TabBarMinimizeOnScrollIfAvailable())
 //        .tabViewBottomAccessory {
 //            LargeButton(title: "Add Rejection") {
 //
@@ -52,5 +52,16 @@ struct ContentView: View {
 #Preview {
     ParraAppPreview(authState: .authenticatedPreview) {
         ContentView()
+    }
+}
+
+/// iOS 26 minimizes the tab bar on scroll. On iOS 18 this modifier is a no-op.
+private struct TabBarMinimizeOnScrollIfAvailable: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.tabBarMinimizeBehavior(.onScrollDown)
+        } else {
+            content
+        }
     }
 }
