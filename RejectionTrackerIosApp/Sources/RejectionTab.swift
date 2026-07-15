@@ -40,6 +40,7 @@ struct RejectionsTab: View {
 
     @Query(sort: \Rejection.createdAt, order: .reverse) var rejections: [Rejection]
     @Environment(\.modelContext) var modelContext
+    @Environment(\.requestReview) private var requestReview
 
     var body: some View {
         NavigationView {
@@ -143,7 +144,30 @@ struct RejectionsTab: View {
                 ShareView(rejection: rejection) {
                     newRejection = nil
                 }
+                .onDisappear {
+                    // Fire the milestone review prompt on DISMISS of the
+                    // celebratory share screen, not on open. The gate makes this
+                    // fire exactly once, at the fifth logged rejection, with a
+                    // 14-day cooldown shared with the manual "Rate This App" row.
+                    requestReviewIfMilestoneReached()
+                }
             }
+        }
+    }
+
+    @MainActor
+    private func requestReviewIfMilestoneReached() {
+        guard ReviewPrompt.shouldRequest(
+            for: .loggedRejection(count: rejections.count)
+        ) else {
+            return
+        }
+
+        // Let the share sheet finish dismissing before the system review sheet
+        // presents over the Rejections tab.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            requestReview()
+            ReviewPrompt.markMilestoneFired()
         }
     }
 }

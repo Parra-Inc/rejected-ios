@@ -9,32 +9,38 @@
 import Parra
 import SwiftUI
 
+/// Settings "Rate This App" row. Opens a custom 1-5 star sheet instead of
+/// deep-linking straight to the App Store write-review page. Five stars fires the
+/// system review prompt; one to four stars routes to the private feedback form.
 struct ReviewAppCell: View {
-    @Environment(\.parraAppInfo) private var parraAppInfo
+    @State private var isRatingSheetPresented = false
 
     var body: some View {
-        if let writeReviewUrl = parraAppInfo.application.appStoreWriteReviewUrl {
+        Button {
+            isRatingSheetPresented = true
+        } label: {
             HStack {
-                Link(
-                    destination: writeReviewUrl
-                ) {
-                    Label(
-                        title: {
-                            Text("Write a Review")
-                        },
-                        icon: {
-                            Image(systemName: "pencil.line")
-                                .foregroundStyle(.tint)
-                        }
-                    )
-                }
-                .foregroundStyle(Color.primary)
+                Label(
+                    title: {
+                        Text("Rate This App")
+                            .foregroundStyle(Color.primary)
+                    },
+                    icon: {
+                        Image(systemName: "star")
+                            .foregroundStyle(.tint)
+                    }
+                )
 
                 Spacer()
 
-                Image(systemName: "arrow.up.right")
-                    .foregroundStyle(.gray)
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(.tertiary)
             }
+        }
+        .buttonStyle(.plain)
+        .sheet(isPresented: $isRatingSheetPresented) {
+            RatingPromptSheet()
         }
     }
 }
