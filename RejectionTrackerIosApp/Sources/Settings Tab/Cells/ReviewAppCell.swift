@@ -7,17 +7,26 @@
 //
 
 import Parra
+import StoreKit
 import SwiftUI
 
-/// Settings "Rate This App" row. Opens a custom 1-5 star sheet instead of
-/// deep-linking straight to the App Store write-review page. Five stars fires the
-/// system review prompt; one to four stars routes to the private feedback form.
+/// Settings "Rate This App" row. Asks the system for a review prompt for every
+/// user, with no in-app rating collected first.
+///
+/// It used to open a custom 1-5 star sheet and forward only 5-star raters to the
+/// store. That is review gating and it is a guideline 5.6.1 rejection.
+///
+/// Once this app has an App Store record, prefer opening
+/// https://apps.apple.com/app/id<APP_ID>?action=write-review directly: a manual
+/// tap deserves a composer that actually appears, and requestReview() is
+/// silently throttled by the OS.
 struct ReviewAppCell: View {
-    @State private var isRatingSheetPresented = false
+    @Environment(\.requestReview) private var requestReview
 
     var body: some View {
         Button {
-            isRatingSheetPresented = true
+            ReviewPrompt.markPrompted()
+            requestReview()
         } label: {
             HStack {
                 Label(
@@ -39,9 +48,6 @@ struct ReviewAppCell: View {
             }
         }
         .buttonStyle(.plain)
-        .sheet(isPresented: $isRatingSheetPresented) {
-            RatingPromptSheet()
-        }
     }
 }
 
