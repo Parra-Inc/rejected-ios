@@ -35,10 +35,13 @@ struct CategorySelectControl: View {
                         if category.id == selectedCategory?.id {
                             Image(systemName: "checkmark")
                                 .foregroundColor(.blue)
+                                .accessibilityHidden(true)
                         }
                     }
                 }
                 .padding(6)
+                .accessibilityLabel("Category: \(category.name)")
+                .accessibilityHint("Changes the category")
             } else {
                 Button(action: {
                     if categories.isEmpty {
@@ -49,7 +52,7 @@ struct CategorySelectControl: View {
                 }) {
                     HStack {
                         Text("Select category")
-                            .foregroundColor(.gray.opacity(0.5))
+                            .foregroundColor(.secondary)
                         Spacer()
                     }
                 }

@@ -39,6 +39,7 @@ struct IconView: View {
 
 
     @Environment(\.parraTheme) var parraTheme
+    @ScaledMetric(relativeTo: .body) private var scale: CGFloat = 1
 
     let icon: Icon?
     let context: Context?
@@ -57,16 +58,17 @@ struct IconView: View {
                     switch icon {
                     case .emoji(let value):
                         Text(value)
-                            .font(.system(size: size.fontSize))
+                            .font(.system(size: size.fontSize * scale))
                     case .image(let url):
                         AsyncImage(url: URL(string: url)) { image in
                             image.resizable().scaledToFit()
                         } placeholder: {
                             ProgressView()
+                                .accessibilityLabel("Loading image")
                         }
                     }
                 }
-                .frame(width: size.rawValue, height: size.rawValue)
+                .frame(width: size.rawValue * scale, height: size.rawValue * scale)
                 .background(Color.gray.opacity(0.1))
 
             } else {
@@ -75,12 +77,12 @@ struct IconView: View {
                         switch context {
                         case .add:
                             Image(systemName: "photo")
-                                .font(.system(size: size.fontSize))
+                                .font(.system(size: size.fontSize * scale))
                                 .foregroundColor(Color.gray.opacity(0.2))
                         }
                     }
                 }
-                .frame(width: size.rawValue, height: size.rawValue)
+                .frame(width: size.rawValue * scale, height: size.rawValue * scale)
                 .background(parraTheme.palette.primaryBackground.toParraColor())
             }
         }

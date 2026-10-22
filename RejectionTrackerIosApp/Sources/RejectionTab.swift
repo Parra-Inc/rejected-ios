@@ -41,6 +41,7 @@ struct RejectionsTab: View {
     @Query(sort: \Rejection.createdAt, order: .reverse) var rejections: [Rejection]
     @Environment(\.modelContext) var modelContext
     @Environment(\.requestReview) private var requestReview
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         NavigationView {
@@ -65,6 +66,7 @@ struct RejectionsTab: View {
                                         .font(.subheadline)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.secondary)
+                                        .accessibilityAddTraits(.isHeader)
                                     Spacer()
                                 }
                                 RejectionStatsView(rejections: rejections)
@@ -76,6 +78,7 @@ struct RejectionsTab: View {
                                         .font(.subheadline)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.secondary)
+                                        .accessibilityAddTraits(.isHeader)
                                     Spacer()
                                 }
                                 VStack(spacing: 6) {
@@ -89,24 +92,32 @@ struct RejectionsTab: View {
                                                 Trailing {
 
                                                     Button {
-                                                        withAnimation {
-                                                            modelContext.deleteRejection(rejection)
-                                                        }
+                                                        deleteRejection(rejection)
                                                     } label: {
                                                         Image(systemName: "trash")
                                                             .foregroundColor(.white)
                                                     }
+                                                    .accessibilityLabel("Delete")
                                                     .contentShape(Rectangle())
                                                     .frame(width: 60)
                                                     .frame(maxHeight: .infinity)
                                                     .background(Color.red) // <=== Look here
                                                 }
                                             } action: { // <= action for full swiping
-                                                withAnimation {
-                                                    modelContext.deleteRejection(rejection)
-                                                }
+                                                deleteRejection(rejection)
                                             }
                                             .cornerRadius(10)
+                                            .contextMenu {
+                                                Button(role: .destructive) {
+                                                    deleteRejection(rejection)
+                                                } label: {
+                                                    Label("Delete", systemImage: "trash")
+                                                }
+                                            }
+                                            .accessibilityElement(children: .combine)
+                                            .accessibilityAction(named: "Delete") {
+                                                deleteRejection(rejection)
+                                            }
                                     }
                                 }
                             }
@@ -128,6 +139,7 @@ struct RejectionsTab: View {
                     } label: {
                         Image(systemName: "plus")
                     }
+                    .accessibilityLabel("Add rejection")
                 }
             }
             .navigationTitle("Rejections")
@@ -151,6 +163,17 @@ struct RejectionsTab: View {
                     // 14-day cooldown shared with the manual "Rate This App" row.
                     requestReviewIfMilestoneReached()
                 }
+            }
+        }
+    }
+
+    @MainActor
+    private func deleteRejection(_ rejection: Rejection) {
+        if reduceMotion {
+            modelContext.deleteRejection(rejection)
+        } else {
+            withAnimation {
+                modelContext.deleteRejection(rejection)
             }
         }
     }

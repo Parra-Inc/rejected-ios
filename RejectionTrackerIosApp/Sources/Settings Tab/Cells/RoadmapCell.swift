@@ -37,6 +37,7 @@ struct RoadmapCell: View {
                 icon: {
                     if isLoading {
                         ProgressView()
+                            .accessibilityLabel("Loading roadmap")
                     } else {
                         Image(systemName: "map")
                     }
@@ -44,6 +45,7 @@ struct RoadmapCell: View {
             )
         }
         .disabled(isLoading)
+        .accessibilityValue(isLoading ? "Loading" : "")
         .presentParraRoadmapWidget(with: $roadmapInfo)
     }
 

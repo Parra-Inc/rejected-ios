@@ -93,6 +93,7 @@ struct CreateRejectionView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
+                    .accessibilityLabel("Close")
                 }
             }
         }

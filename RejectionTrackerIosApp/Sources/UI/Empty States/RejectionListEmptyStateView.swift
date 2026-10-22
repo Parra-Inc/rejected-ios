@@ -16,10 +16,11 @@ struct RejectionListEmptyStateView: View {
 
             VStack(spacing: 8) {
                 Text("Oh no!")
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.title.bold())
+                    .accessibilityAddTraits(.isHeader)
 
                 Text("We're sorry you found us.\nAdd your rejection to get started!")
-                    .font(.system(size: 18))
+                    .font(.body)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.secondary)
             }
@@ -31,10 +32,12 @@ struct RejectionListEmptyStateView: View {
 
 struct LargeAnimatedEmojiView: View {
     @State private var wiggleAmount = 0.0
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ScaledMetric(relativeTo: .largeTitle) private var emojiSize: CGFloat = 120
 
     var body: some View {
         Text("😭")
-            .font(.system(size: 120))
+            .font(.system(size: emojiSize))
             .rotationEffect(.degrees(wiggleAmount))
             .animation(
                 Animation.easeInOut(duration: 0.5)
@@ -42,8 +45,11 @@ struct LargeAnimatedEmojiView: View {
                 value: wiggleAmount
             )
             .onAppear {
-                wiggleAmount = 5
+                if !reduceMotion {
+                    wiggleAmount = 5
+                }
             }
+            .accessibilityHidden(true)
     }
 }
 
