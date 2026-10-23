@@ -70,6 +70,7 @@ struct CategoryPickerView: View {
                                     if category.id == selectedCategory?.id {
                                         Image(systemName: "checkmark")
                                             .foregroundColor(.blue)
+                                            .accessibilityHidden(true)
                                     }
                                 }
                                 .frame(maxWidth: .infinity)
@@ -90,6 +91,7 @@ struct CategoryPickerView: View {
                                                 Image(systemName: "trash")
                                                     .foregroundColor(.white)
                                             }
+                                            .accessibilityLabel("Delete category")
                                             .contentShape(Rectangle())
                                             .frame(width: 60)
                                             .frame(maxHeight: .infinity)
@@ -104,6 +106,19 @@ struct CategoryPickerView: View {
                             }
                             .frame(maxWidth: .infinity)
                             .cornerRadius(10)
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    withAnimation {
+                                        deleteCategory(category)
+                                    }
+                                } label: {
+                                    Label("Delete category", systemImage: "trash")
+                                }
+                            }
+                            .accessibilityAddTraits(category.id == selectedCategory?.id ? .isSelected : [])
+                            .accessibilityAction(named: "Delete category") {
+                                deleteCategory(category)
+                            }
                         }
                     }
                     .safeAreaPadding()
@@ -145,6 +160,7 @@ struct CategoryPickerView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
+                    .accessibilityLabel("Close")
                 }
             }
         }

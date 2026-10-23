@@ -14,6 +14,8 @@ struct ShareView: View {
     @State private var isTipJarPresented = false
 
     @Environment(\.parraAppInfo) private var parraAppInfo
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ScaledMetric(relativeTo: .largeTitle) private var emojiSize: CGFloat = 120
 
     let rejection: Rejection
     let onComplete: () -> Void
@@ -25,16 +27,17 @@ struct ShareView: View {
             VStack(spacing: 12) {
                 ZStack {
                     Text("😭")
-                        .font(.system(size: 120))
+                        .font(.system(size: emojiSize))
                         .opacity(showSmiley ? 0 : 1)
 
                     Text("🤠")
-                        .font(.system(size: 120))
+                        .font(.system(size: emojiSize))
                         .opacity(showSmiley ? 1 : 0)
                         .scaleEffect(bounce ? 1.2 : 1.0)
                 }
-                .animation(.easeInOut(duration: 1.5).delay(2), value: showSmiley)
-                .animation(.interpolatingSpring(stiffness: 300, damping: 10).delay(3), value: bounce)
+                .animation(reduceMotion ? nil : .easeInOut(duration: 1.5).delay(2), value: showSmiley)
+                .animation(reduceMotion ? nil : .interpolatingSpring(stiffness: 300, damping: 10).delay(3), value: bounce)
+                .accessibilityHidden(true)
 
                 Text("Now it's time to turn that frown upside down, get back out there and grind harder!")
                     .font(.headline)
@@ -101,6 +104,10 @@ struct ShareView: View {
         .presentationDetents([.large])
         .presentationDragIndicator(.visible)
         .onAppear {
+            if reduceMotion {
+                showSmiley = true
+                return
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 showSmiley = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

@@ -12,6 +12,9 @@ struct TipJarView: View {
     @Binding var isPresented: Bool
     @State private var storeManager = StoreManager()
     @State private var animatedEmoji = "🙏"
+    @State private var emojiTimer: Timer?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ScaledMetric(relativeTo: .largeTitle) private var emojiSize: CGFloat = 80
     private let emojiOptions = ["🙏", "❤️", "✨", "💖"]
 
     var body: some View {
@@ -36,11 +39,11 @@ struct TipJarView: View {
             VStack(spacing: 15) {
                 Text("Buy some karma!")
                     .font(.caption)
-                    .foregroundColor(.gray.opacity(0.5))
+                    .foregroundColor(.secondary)
                 if let error = storeManager.error {
                     Text("Something went wrong: \(error.localizedDescription)")
                         .font(.caption)
-                        .foregroundColor(.red.opacity(70))
+                        .foregroundColor(.red.opacity(0.7))
                         .padding(.vertical, 10)
                 }
                 ForEach(storeManager.products, id: \.self) { product in
@@ -72,16 +75,26 @@ struct TipJarView: View {
 
     private var animatedEmojiView: some View {
         Text(animatedEmoji)
-            .font(.system(size: 80))
+            .font(.system(size: emojiSize))
+            .accessibilityHidden(true)
             .onAppear {
                 animateEmoji()
+            }
+            .onDisappear {
+                emojiTimer?.invalidate()
+                emojiTimer = nil
             }
     }
 
     private func animateEmoji() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            withAnimation {
-                animatedEmoji = emojiOptions.randomElement() ?? "🙏"
+        guard !reduceMotion, emojiTimer == nil else { return }
+        let options = emojiOptions
+        let binding = $animatedEmoji
+        emojiTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            Task { @MainActor in
+                withAnimation {
+                    binding.wrappedValue = options.randomElement() ?? "🙏"
+                }
             }
         }
     }
@@ -119,5 +132,7 @@ struct TipButton: View {
             .foregroundColor(.blue)
             .cornerRadius(10)
         }
+        .accessibilityLabel("Tip \(product.displayPrice)")
+        .accessibilityHint("Buys some karma with a one-time tip")
     }
 }

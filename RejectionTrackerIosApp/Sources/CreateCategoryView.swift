@@ -87,6 +87,7 @@ struct CreateCategoryView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
+                    .accessibilityLabel("Close")
                 }
             }
             .sheet(isPresented: $showingEmojiPicker) {

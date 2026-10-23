@@ -44,6 +44,7 @@ struct RejectionStatsView: View {
 
             Spacer()
         }
+        .accessibilityElement(children: .combine)
     }
 
     private var lastRejectionView: some View {
@@ -59,6 +60,7 @@ struct RejectionStatsView: View {
 
             Spacer()
         }
+        .accessibilityElement(children: .combine)
     }
 
     private var topCategoriesView: some View {
@@ -67,6 +69,7 @@ struct RejectionStatsView: View {
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundColor(.secondary)
+                .accessibilityAddTraits(.isHeader)
 
             LazyVGrid(columns: [
                 GridItem(.flexible()),
