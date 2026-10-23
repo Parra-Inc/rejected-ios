@@ -62,7 +62,7 @@ import Parra
         Task { @MainActor in
             if isSaving { return }
 
-            withAnimation { isSaving = true }
+            withAnimation(UIAccessibility.isReduceMotionEnabled ? nil : .default) { isSaving = true }
 
             var success = true
             var properties: [String: ParraAnyCodable] = [:]
@@ -86,7 +86,7 @@ import Parra
                 ParraLogger.error("Error saving user info", error)
             }
 
-            withAnimation {
+            withAnimation(UIAccessibility.isReduceMotionEnabled ? nil : .default) {
                 isSaving = false
                 isDirty = !success
             }

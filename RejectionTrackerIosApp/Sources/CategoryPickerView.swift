@@ -17,6 +17,7 @@ struct CategoryRow: View {
     var body: some View {
         HStack {
             IconView(icon: category.decodedIcon())
+                .accessibilityHidden(true)
 
             Text(category.name)
                 .font(.headline)
@@ -39,6 +40,7 @@ struct CategoryPickerView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.parraTheme) var parraTheme
     @Environment(\.modelContext) var modelContext
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var createCategoryViewHeight: CGFloat = 300
 
@@ -62,6 +64,7 @@ struct CategoryPickerView: View {
                             } label: {
                                 HStack {
                                     IconView(icon: category.decodedIcon())
+                                        .accessibilityHidden(true)
                                     //
                                     Text(category.name)
                                         .foregroundColor(.primary)
@@ -84,9 +87,7 @@ struct CategoryPickerView: View {
                                         Trailing {
 
                                             Button {
-                                                withAnimation {
-                                                    deleteCategory(category)
-                                                }
+                                                animatedDelete(category)
                                             } label: {
                                                 Image(systemName: "trash")
                                                     .foregroundColor(.white)
@@ -98,9 +99,7 @@ struct CategoryPickerView: View {
                                             .background(Color.red) // <=== Look here
                                         }
                                     } action: { // <= action for full swiping
-                                        withAnimation {
-                                            deleteCategory(category)
-                                        }
+                                        animatedDelete(category)
                                     }
 
                             }
@@ -108,9 +107,7 @@ struct CategoryPickerView: View {
                             .cornerRadius(10)
                             .contextMenu {
                                 Button(role: .destructive) {
-                                    withAnimation {
-                                        deleteCategory(category)
-                                    }
+                                    animatedDelete(category)
                                 } label: {
                                     Label("Delete category", systemImage: "trash")
                                 }
@@ -140,7 +137,7 @@ struct CategoryPickerView: View {
                     .background {
                         GeometryReader { geometry in
                             LinearGradient(
-                                gradient: Gradient(colors: [.white.opacity(0), .white, .white]),
+                                gradient: Gradient(colors: [Color(.systemBackground).opacity(0), Color(.systemBackground), Color(.systemBackground)]),
                                 startPoint: .top,
                                 endPoint: .bottom
                             )
@@ -177,6 +174,13 @@ struct CategoryPickerView: View {
             .modifier(GetHeightModifier(height: $createCategoryViewHeight))
             .presentationDetents([.height(createCategoryViewHeight)])
             .presentationDragIndicator(.visible)
+        }
+    }
+
+    private func animatedDelete(_ category: Category) {
+        let animation: SwiftUI.Animation? = reduceMotion ? nil : SwiftUI.Animation.easeInOut
+        withAnimation(animation) {
+            deleteCategory(category)
         }
     }
 

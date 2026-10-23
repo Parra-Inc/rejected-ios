@@ -19,6 +19,7 @@ struct RejectionRow: View {
     var body: some View {
         HStack {
             IconView(icon: rejection.category?.decodedIcon())
+                .accessibilityHidden(true)
 
             Text(rejection.title)
                 .font(.headline)
@@ -42,6 +43,7 @@ struct RejectionsTab: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.requestReview) private var requestReview
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @AccessibilityFocusState private var isAddButtonFocused: Bool
 
     var body: some View {
         NavigationView {
@@ -140,10 +142,13 @@ struct RejectionsTab: View {
                         Image(systemName: "plus")
                     }
                     .accessibilityLabel("Add rejection")
+                    .accessibilityFocused($isAddButtonFocused)
                 }
             }
             .navigationTitle("Rejections")
-            .sheet(isPresented: $showingAddRejection) {
+            .sheet(isPresented: $showingAddRejection, onDismiss: {
+                if newRejection == nil { isAddButtonFocused = true }
+            }) {
                 CreateRejectionView { rejection in
                     showingAddRejection = false
                     newRejection = rejection
@@ -152,7 +157,9 @@ struct RejectionsTab: View {
                     showingAddRejection = false
                 }
             }
-            .sheet(item: $newRejection) { rejection in
+            .sheet(item: $newRejection, onDismiss: {
+                isAddButtonFocused = true
+            }) { rejection in
                 ShareView(rejection: rejection) {
                     newRejection = nil
                 }

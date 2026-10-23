@@ -18,6 +18,7 @@ struct CategorySelectControl: View {
     let onComplete: (Category) -> Void
 
     @State private var createCategoryViewHeight: CGFloat = 300
+    @AccessibilityFocusState private var isControlFocused: Bool
 
     var body: some View {
         HStack {
@@ -64,12 +65,13 @@ struct CategorySelectControl: View {
         }
         .background(parraTheme.palette.primaryBackground.toParraColor())
         .cornerRadius(10)
-        .sheet(isPresented: $showingCategoryPicker) {
+        .accessibilityFocused($isControlFocused)
+        .sheet(isPresented: $showingCategoryPicker, onDismiss: { isControlFocused = true }) {
             CategoryPickerView(selectedCategory: $selectedCategory, onComplete: onComplete) {
                 showingCategoryPicker = false
             }
         }
-        .sheet(isPresented: $showingCreateCategoryView) {
+        .sheet(isPresented: $showingCreateCategoryView, onDismiss: { isControlFocused = true }) {
             CreateCategoryView(
                 onComplete: { category in
                     selectedCategory = category
