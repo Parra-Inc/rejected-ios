@@ -15,6 +15,7 @@ struct AccountView: View {
     
     @State private var isSigningIn = false
     @State private var isEditProfilePresented = false
+    @AccessibilityFocusState private var isEditProfileFocused: Bool
 
     var body: some View {
         let user = parraAuthState.user
@@ -40,8 +41,12 @@ struct AccountView: View {
                         Image(systemName: "chevron.forward")
                             .font(Font.system(.caption).weight(.bold))
                             .foregroundColor(Color(UIColor.tertiaryLabel))
+                            .accessibilityHidden(true)
                     }
                 }
+                .accessibilityLabel("Edit Profile")
+                .accessibilityValue(user?.info.displayName ?? "")
+                .accessibilityFocused($isEditProfileFocused)
             }
 
             // Anonymous users can't sign out, change password, etc.
@@ -88,7 +93,7 @@ struct AccountView: View {
             }
         }
         .navigationTitle("Account")
-        .sheet(isPresented: $isEditProfilePresented) {
+        .sheet(isPresented: $isEditProfilePresented, onDismiss: { isEditProfileFocused = true }) {
             NavigationStack {
                 EditProfileView()
             }

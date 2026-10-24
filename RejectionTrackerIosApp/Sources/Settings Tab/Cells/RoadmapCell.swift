@@ -45,7 +45,6 @@ struct RoadmapCell: View {
             )
         }
         .disabled(isLoading)
-        .accessibilityValue(isLoading ? "Loading" : "")
         .presentParraRoadmapWidget(with: $roadmapInfo)
     }
 

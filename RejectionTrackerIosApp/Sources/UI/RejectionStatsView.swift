@@ -86,6 +86,8 @@ struct RejectionStatsView: View {
 
                         Spacer()
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("\(categoryStats.category.name): \(categoryStats.count) \(categoryStats.count == 1 ? "rejection" : "rejections")")
                 }
             }
         }

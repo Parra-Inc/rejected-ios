@@ -74,7 +74,7 @@ struct CreateRejectionView: View {
                     .background {
                         GeometryReader { geometry in
                             LinearGradient(
-                                gradient: Gradient(colors: [.white.opacity(0), .white, .white]),
+                                gradient: Gradient(colors: [Color(.systemBackground).opacity(0), Color(.systemBackground), Color(.systemBackground)]),
                                 startPoint: .top,
                                 endPoint: .bottom
                             )
