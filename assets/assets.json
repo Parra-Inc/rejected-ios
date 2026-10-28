@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "name": "Rejected",
+  "publicDir": "public",
+  "collections": [
+    {
+      "id": "icon-debug",
+      "label": "App Icon (Debug)",
+      "sourceSize": { "width": 1024, "height": 1024 },
+      "borderRadius": 224,
+      "templates": [
+        { "src": "assets/icon/icon-debug.html", "name": "icon-debug", "label": "Debug Icon" }
+      ],
+      "export": [
+        { "name": "1024", "label": "1024px", "size": { "width": 1024, "height": 1024 } },
+        { "type": "xcode", "path": "../RejectionTrackerIosApp/Assets.xcassets/AppIcon-Debug.appiconset" }
+      ]
+    }
+  ]
+}
