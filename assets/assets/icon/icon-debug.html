@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1024" />
+    <style>
+      * { margin: 0; padding: 0; }
+      body { width: 1024px; height: 1024px; overflow: hidden; position: relative; }
+
+      /* Canonical DEBUG ribbon. Do NOT re-brand per app: the amber gradient,
+         dark teal text, size, angle, and position are fixed so every app's
+         debug icon reads identically on the home screen. The only thing that
+         changes between apps is the base icon <img> below. */
+      .ribbon {
+        position: absolute;
+        width: 1200px;
+        height: 190px;
+        left: -300px;
+        top: 669px;
+        transform: rotate(45deg);
+        background: linear-gradient(180deg, #F2B24F 0%, #E8A84C 45%, #D98F2B 100%);
+        box-shadow: 0 12px 36px rgba(13, 61, 56, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 8px solid rgba(255, 255, 255, 0.35);
+        border-bottom: 8px solid rgba(13, 61, 56, 0.25);
+      }
+
+      .ribbon span {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+        font-size: 132px;
+        font-weight: 900;
+        letter-spacing: 18px;
+        text-indent: 18px; /* offset trailing letter-spacing so text centers optically */
+        color: #0B3B35;
+        text-shadow: 0 2px 0 rgba(255, 255, 255, 0.25);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ONLY line to adapt per app: point at the app's existing 1024x1024
+         icon source (SVG or PNG). Everything else stays byte-identical. -->
+    <img src="../../public/app-icon.png" width="1024" height="1024" />
+    <div class="ribbon"><span>DEBUG</span></div>
+  </body>
+</html>

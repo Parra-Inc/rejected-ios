@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "assets": {
+    "icon-debug/icon-debug": {
+      "exports/icon-debug/1024.png": {
+        "sourceChecksum": "sha256:50039c663d2a2aea687f064d36672f27a861df2c415959a32cbde1b5d37a0dae",
+        "outputPath": "exports/icon-debug/1024.png",
+        "exportedAt": "2026-10-28T16:24:38.581Z",
+        "exportChecksum": "sha256:34fbda550402d1e0180c418018efe3c7d0f2abf5461cd5eb76c6841fb481e724"
+      }
+    }
+  }
+}
