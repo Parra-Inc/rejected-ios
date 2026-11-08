@@ -1,13 +1,40 @@
 {
-  "version": 1,
-  "assets": {
-    "icon-debug/icon-debug": {
-      "exports/icon-debug/1024.png": {
-        "sourceChecksum": "sha256:50039c663d2a2aea687f064d36672f27a861df2c415959a32cbde1b5d37a0dae",
-        "outputPath": "exports/icon-debug/1024.png",
-        "exportedAt": "2026-10-28T16:24:38.581Z",
-        "exportChecksum": "sha256:34fbda550402d1e0180c418018efe3c7d0f2abf5461cd5eb76c6841fb481e724"
-      }
+  "lockfileVersion": 2,
+  "renderer": 1,
+  "tool": "0.6.3",
+  "fingerprint": "sha256:8a4d9ea89e6db9b253463c0e8b02d9a87551c38436ca8272c828f9d80c0c39d6",
+  "files": {
+    "assets/icon/icon-debug.html": "sha256:a86e1052a77deefbd73ae635e5250975d4eac3bb33550486c023806cb4968b9f",
+    "public/app-icon.png": "sha256:136e4f1162aa35d00ec24ad67d0abc5178e8a4a563cb3dd6c94552894a4cafd8"
+  },
+  "templates": {
+    "assets/icon/icon-debug.html": [
+      "public/app-icon.png"
+    ]
+  },
+  "strings": {},
+  "outputs": {
+    "../RejectionTrackerIosApp/Assets.xcassets/AppIcon-Debug.appiconset/AppIcon.png": {
+      "assets": null,
+      "collection": "icon-debug",
+      "config": "sha256:58ee2e21c4f767d2683ff9cc8681381c63eee0503ad92fcca33a8ad5b981b115",
+      "key": "sha256:0c0aca41ff51c51934d69a3c5b9cb6d53ed589780e1fec801feac379438bcec6",
+      "png": "sha256:53515d7d7c4dba910c21e8869db3a6922024a3c8345ccb288c155a57ab3ad6d5",
+      "renderer": 1,
+      "source": "sha256:f294a3d4c3cf5311c42d32888e8ca3f44815137cccffcf5ff10396371ba1801b",
+      "strings": null,
+      "template": "icon-debug"
+    },
+    "exports/icon-debug/1024.png": {
+      "assets": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "collection": "icon-debug",
+      "config": "sha256:7bfe441e05be6c9edd7e8bc07a69197592c95d733b57d60fdf3b0598609f4945",
+      "key": "sha256:c2bfcf809529fa52f9948a32fedf579218605a74c61713968fb5d34e83c03d34",
+      "png": "sha256:53515d7d7c4dba910c21e8869db3a6922024a3c8345ccb288c155a57ab3ad6d5",
+      "renderer": 1,
+      "source": "sha256:f294a3d4c3cf5311c42d32888e8ca3f44815137cccffcf5ff10396371ba1801b",
+      "strings": null,
+      "template": "icon-debug"
     }
   }
 }
