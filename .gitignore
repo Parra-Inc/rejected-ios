@@ -114,3 +114,6 @@ EmojiPickerSample/.DS_Store
 # Git worktrees (Claude Code)
 .worktrees/
 .claude/worktrees/
+
+# open-assets local file-hash cache
+.open-assets/
