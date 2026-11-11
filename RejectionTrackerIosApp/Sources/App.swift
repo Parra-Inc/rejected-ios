@@ -7,6 +7,7 @@
 //
 
 import Parra
+import RevenueHog
 import SwiftUI
 import SwiftData
 
@@ -24,6 +25,13 @@ struct RejectionTrackerIosApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     @AppStorage("db_seeded") private var seeded = false
+
+    init() {
+        // RevenueHog attribution. No API key: iOS authenticates via App Attest.
+        // The SDK enrolls the device, attributes StoreKit 2 purchases, captures
+        // Apple Ads (AdServices) attribution and queues offline on its own.
+        RevenueHog.configure()
+    }
 
     var body: some Scene {
         // Visit Parra's configuration docs to learn what options are available.

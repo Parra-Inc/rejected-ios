@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1B2C3D40000000000000R03 /* RevenueHog in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D40000000000000R02 /* RevenueHog */; };
 		32AA4522A840809550650DB6 /* Parra in Frameworks */ = {isa = PBXBuildFile; productRef = 27C4AC8F0EC4CF75C24658AF /* Parra */; };
 		570CE327EF483974A2962D2C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A91F279230C42DF0CAF3ADA3 /* PrivacyInfo.xcprivacy */; };
 		822FAE652CC7DA41004D9FC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 822FAE642CC7DA41004D9FC5 /* StoreKit.framework */; };
@@ -36,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1B2C3D40000000000000R03 /* RevenueHog in Frameworks */,
 				8262A38D2CC6C0FE00C06860 /* EmojiPicker in Frameworks */,
 				32AA4522A840809550650DB6 /* Parra in Frameworks */,
 				8262A3842CC699E800C06860 /* SwipeActions in Frameworks */,
@@ -105,6 +107,7 @@
 			);
 			name = Rejected;
 			packageProductDependencies = (
+				A1B2C3D40000000000000R02 /* RevenueHog */,
 				27C4AC8F0EC4CF75C24658AF /* Parra */,
 				8262A3832CC699E800C06860 /* SwipeActions */,
 				8262A38C2CC6C0FE00C06860 /* EmojiPicker */,
@@ -169,6 +172,7 @@
 			);
 			mainGroup = 4661E79BDB9ED949105C7EA7;
 			packageReferences = (
+				A1B2C3D40000000000000R01 /* XCRemoteSwiftPackageReference "revenue-hog-sdks" */,
 				9BA8EBCDD90E8698EDAE055F /* XCRemoteSwiftPackageReference "parra-mobile-sdks" */,
 				8262A3822CC699E800C06860 /* XCRemoteSwiftPackageReference "SwipeActions" */,
 				8262A38B2CC6C0FE00C06860 /* XCRemoteSwiftPackageReference "EmojiPicker" */,
@@ -437,6 +441,14 @@
 				minimumVersion = 0.10.1;
 			};
 		};
+		A1B2C3D40000000000000R01 /* XCRemoteSwiftPackageReference "revenue-hog-sdks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Parra-Inc/revenue-hog-sdks";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -454,6 +466,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8262A38B2CC6C0FE00C06860 /* XCRemoteSwiftPackageReference "EmojiPicker" */;
 			productName = EmojiPicker;
+		};
+		A1B2C3D40000000000000R02 /* RevenueHog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B2C3D40000000000000R01 /* XCRemoteSwiftPackageReference "revenue-hog-sdks" */;
+			productName = RevenueHog;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

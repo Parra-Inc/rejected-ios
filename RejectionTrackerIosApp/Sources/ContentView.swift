@@ -7,6 +7,7 @@
 //
 
 import Parra
+import RevenueHog
 import SwiftUI
 
 enum Tabs {
@@ -18,6 +19,7 @@ enum Tabs {
 struct ContentView: View {
     @State var selectedTab: Tabs = .home
     @State var searchString = ""
+    @Environment(\.parraAuthState) private var parraAuthState
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -40,6 +42,15 @@ struct ContentView: View {
             }
         }
         .modifier(TabBarMinimizeOnScrollIfAvailable())
+        // Link RevenueHog's anonymous id to the Parra account on login, and
+        // forget it on logout so the next user starts fresh.
+        .onChange(of: parraAuthState.user?.info.id, initial: true) { oldId, newId in
+            if let newId {
+                RevenueHog.identify(userId: newId)
+            } else if oldId != nil {
+                RevenueHog.reset()
+            }
+        }
 //        .tabViewBottomAccessory {
 //            LargeButton(title: "Add Rejection") {
 //
