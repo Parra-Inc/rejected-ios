@@ -1,5 +1,5 @@
 {
-  "originHash" : "81e688d7c89cd4e706bb7c3908cbc4265f3c3901ac635204dc68addcfcecc620",
+  "originHash" : "5d955127791de82470ff42d20943fdd916890ee8ff5ee812137a06727e499341",
   "pins" : [
     {
       "identity" : "checkout-sheet-kit-swift",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "ba9305883fa613e554af9cc3847834ffc8d1ef46",
         "version" : "0.10.1"
+      }
+    },
+    {
+      "identity" : "revenue-hog-sdks",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Parra-Inc/revenue-hog-sdks",
+      "state" : {
+        "revision" : "9c3d5665b87e36cc3ffd6de7c9121522dcdcade9",
+        "version" : "0.5.1"
       }
     },
     {
